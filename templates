@@ -1,1 +1,88 @@
 
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>תחזית שכר דירה</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 25px;
+      margin: 0 auto;
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: right;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .result {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <h2>הזן פרטי דירה</h2>
+  <form method="post" action="{{ url_for('predict') }}">
+    <label>שכונה:</label>
+    <input type="text" name="neighborhood" required>
+
+    <label>מספר חדרים:</label>
+    <input type="text" name="room_num" required>
+
+    <label>שטח (מ"ר):</label>
+    <input type="text" name="area" required>
+
+    <label>קומה:</label>
+    <input type="text" name="floor" required>
+
+    <input type="submit" value="הערך שכר דירה">
+  </form>
+
+  {% if prediction %}
+    <div class="result">
+      שכר דירה חזוי: {{ prediction }} ש"ח
+    </div>
+  {% endif %}
+</body>
+</html>
+
